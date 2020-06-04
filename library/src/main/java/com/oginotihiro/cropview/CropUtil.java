@@ -24,7 +24,6 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
@@ -33,6 +32,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.Closeable;
 import java.io.File;
@@ -128,10 +129,9 @@ public class CropUtil {
 		}
 	}
 
-	public static int getExifRotation(File imageFile) {
-		if (imageFile == null) return 0;
+	public static int getExifRotation(InputStream is) {
 		try {
-			ExifInterface exif = new ExifInterface(imageFile.getAbsolutePath());
+			ExifInterface exif = new ExifInterface(is);
 			// We only recognize a subset of orientation tag values
 			switch (exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)) {
 				case ExifInterface.ORIENTATION_ROTATE_90:

@@ -131,7 +131,7 @@ public class CropView extends ImageView implements ViewTreeObserver.OnGlobalLayo
                 is = context.getContentResolver().openInputStream(mSource);
                 BitmapFactory.Options option = new BitmapFactory.Options();
                 option.inSampleSize = mSampleSize;
-                RotateBitmap rotateBitmap = new RotateBitmap(BitmapFactory.decodeStream(is, null, option), CropUtil.getExifRotation(imageFile));
+                RotateBitmap rotateBitmap = new RotateBitmap(BitmapFactory.decodeStream(is, null, option), CropUtil.getExifRotation(is));
 
                 if (rotateBitmap != null) {
                     setImageRotateBitmap(rotateBitmap);
